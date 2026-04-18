@@ -43,13 +43,13 @@
   .hero {
     position: relative;
     z-index: 1;
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 16px 20px 16px;
   }
 
   .badge {
@@ -62,8 +62,8 @@
     text-transform: uppercase;
     padding: 6px 18px;
     border-radius: 50px;
-    margin-bottom: 24px;
-    animation: fadeDown .6s ease both;
+    margin-bottom: 10px;
+    animation: fadeDown .6s ease both, badgePulse 2s ease-in-out 1s infinite;
   }
 
   .hero-logo {
@@ -82,7 +82,7 @@
     font-size: clamp(.95rem, 2.5vw, 1.2rem);
     color: rgba(255,255,255,.7);
     max-width: 560px;
-    margin: 18px auto 36px;
+    margin: 10px auto 22px;
     line-height: 1.7;
     animation: fadeDown .7s .2s ease both;
   }
@@ -102,7 +102,26 @@
     text-decoration: none;
     box-shadow: 0 0 40px rgba(37,211,102,.4);
     transition: transform .2s, box-shadow .2s;
-    animation: fadeDown .7s .35s ease both;
+    animation: fadeDown .7s .35s ease both, waPulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-main::before {
+    content:'';
+    position:absolute;
+    top:0; left:-120%;
+    width:55%; height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
+    animation:shimmerWa 2.2s ease-in-out 1s infinite;
+  }
+  @keyframes shimmerWa {
+    0%   { left:-120%; }
+    55%  { left:140%; }
+    100% { left:140%; }
+  }
+  @keyframes waPulse {
+    0%,100% { box-shadow:0 0 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.4); }
+    50%     { box-shadow:0 0 50px rgba(37,211,102,.9), 0 0 0 12px rgba(37,211,102,.05); }
   }
   .cta-main:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 60px rgba(37,211,102,.6); }
   .cta-main svg { width: 22px; height: 22px; flex-shrink: 0; }
@@ -115,7 +134,7 @@
     gap: 32px;
     flex-wrap: wrap;
     padding: 20px;
-    margin-top: -10px;
+    margin-top: 0px;
   }
   .trust-item { text-align: center; }
   .trust-num {
@@ -129,30 +148,30 @@
   .trust-label { font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5); }
 
   /* ── SECTION ── */
-  section { position: relative; z-index: 1; padding: 80px 20px; }
+  section { position: relative; z-index: 1; padding: 40px 20px; }
   .section-title {
     font-family: 'Bebas Neue', cursive;
     font-size: clamp(2rem, 6vw, 3rem);
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
     background: linear-gradient(90deg, #fff, var(--gold));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .section-sub { text-align: center; color: rgba(255,255,255,.5); margin-bottom: 50px; font-size: .9rem; }
+  .section-sub { text-align: center; color: rgba(255,255,255,.5); margin-bottom: 28px; font-size: .9rem; }
   .divider {
     width: 60px; height: 3px;
     background: linear-gradient(90deg, var(--fire), var(--gold));
-    margin: 0 auto 14px;
+    margin: 0 auto 8px;
     border-radius: 2px;
   }
 
   /* ── WHO WE HELP ── */
   .grid-niches {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     max-width: 780px;
     margin: 0 auto;
   }
@@ -160,10 +179,32 @@
     background: var(--card);
     border: 1px solid rgba(255,180,0,.15);
     border-radius: 16px;
-    padding: 22px 12px;
+    padding: 14px 10px;
     text-align: center;
     backdrop-filter: blur(8px);
-    transition: transform .25s, border-color .25s, box-shadow .25s;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), border-color .3s, box-shadow .3s;
+    animation: nichePop .5s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes nichePop {
+    from { opacity:0; transform:scale(.8) translateY(20px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+  }
+  .niche-card:nth-child(1)  { animation-delay:.05s; }
+  .niche-card:nth-child(2)  { animation-delay:.1s; }
+  .niche-card:nth-child(3)  { animation-delay:.15s; }
+  .niche-card:nth-child(4)  { animation-delay:.2s; }
+  .niche-card:nth-child(5)  { animation-delay:.25s; }
+  .niche-card:nth-child(6)  { animation-delay:.3s; }
+  .niche-card:nth-child(7)  { animation-delay:.35s; }
+  .niche-card:nth-child(8)  { animation-delay:.4s; }
+  .niche-card:nth-child(9)  { animation-delay:.45s; }
+  .niche-card:nth-child(10) { animation-delay:.5s; }
+  .niche-card:nth-child(11) { animation-delay:.55s; }
+  .niche-card:nth-child(12) { animation-delay:.6s; }
+  .niche-card:hover, .niche-card:active {
+    transform:translateY(-8px) scale(1.07) !important;
+    border-color:var(--gold) !important;
+    box-shadow:0 0 28px rgba(255,180,0,.5) !important;
   }
   .niche-card:hover {
     transform: translateY(-6px);
@@ -173,11 +214,38 @@
   .niche-icon { font-size: 2rem; margin-bottom: 10px; }
   .niche-card p { font-size: .82rem; color: rgba(255,255,255,.8); line-height: 1.4; }
 
+
+  .niche-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .niche-tap {
+    font-size: .68rem;
+    color: var(--gold);
+    margin-top: 6px;
+    opacity: .7;
+    font-weight: 600;
+    letter-spacing: .5px;
+  }
+  .niche-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,107,0,.15), rgba(255,180,0,.1));
+    opacity: 0;
+    transition: opacity .3s;
+    border-radius: 16px;
+  }
+  .niche-card:hover::after, .niche-card:active::after { opacity: 1; }
+
   /* ── SERVICES ── */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 12px;
     max-width: 900px;
     margin: 0 auto;
   }
@@ -185,7 +253,7 @@
     background: linear-gradient(135deg, rgba(255,107,0,.08), rgba(255,180,0,.05));
     border: 1px solid rgba(255,107,0,.2);
     border-radius: 16px;
-    padding: 24px 20px;
+    padding: 16px 14px;
     display: flex;
     align-items: flex-start;
     gap: 14px;
@@ -207,7 +275,7 @@
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    gap: 14px;
     max-width: 860px;
     margin: 0 auto;
   }
@@ -215,13 +283,21 @@
     background: var(--card);
     border: 1px solid rgba(255,255,255,.1);
     border-radius: 24px;
-    padding: 36px 28px;
+    padding: 22px 18px;
     text-align: center;
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
     transition: transform .25s, box-shadow .25s;
+    animation: cardFloat 4s ease-in-out infinite;
   }
+  @keyframes cardFloat {
+    0%,100% { transform:translateY(0px); }
+    50%     { transform:translateY(-6px); }
+  }
+  .plan-card:nth-child(1) { animation-delay:0s; }
+  .plan-card:nth-child(2) { animation-delay:.6s; }
+  .plan-card:nth-child(3) { animation-delay:1.2s; }
   .plan-card::before {
     content: '';
     position: absolute;
@@ -236,6 +312,13 @@
     box-shadow: 0 0 40px rgba(255,180,0,.15);
   }
   .popular-badge {
+    animation: popBlink 1.6s ease-in-out infinite;
+  }
+  @keyframes popBlink {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%     { opacity:.75; transform:scale(1.08); }
+  }
+  .popular-badge-x {
     position: absolute; top: 14px; right: 14px;
     background: linear-gradient(90deg, var(--fire), var(--gold));
     color: #000; font-size: .65rem; font-weight: 800;
@@ -287,7 +370,7 @@
   }
   .step {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     align-items: flex-start;
     position: relative;
     padding-bottom: 36px;
@@ -313,7 +396,7 @@
   /* ── FINAL CTA ── */
   .final-cta {
     text-align: center;
-    padding: 80px 20px;
+    padding: 40px 20px;
     position: relative; z-index: 1;
   }
   .final-cta h2 {
@@ -332,7 +415,7 @@
   footer {
     position: relative; z-index: 1;
     text-align: center;
-    padding: 24px 20px;
+    padding: 16px 14px;
     border-top: 1px solid rgba(255,255,255,.06);
     font-size: .75rem;
     color: rgba(255,255,255,.25);
@@ -386,7 +469,7 @@
     background: linear-gradient(135deg, rgba(255,107,0,.1), rgba(255,180,0,.06));
     border: 1px solid rgba(255,180,0,.25);
     border-radius: 28px;
-    padding: 40px 36px;
+    padding: 24px 22px;
     backdrop-filter: blur(12px);
     box-shadow: 0 0 60px rgba(255,107,0,.1);
   }
@@ -447,88 +530,342 @@
   }
 
 
-  /* ── BUTTON ANIMATIONS ── */
+  /* ── SCROLL DOWN ARROW ── */
+  .scroll-down-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 6px auto 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+  .scroll-down-arrow span {
+    font-size: .72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+  }
+  .arrow-chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .arrow-chevrons i {
+    display: block;
+    width: 18px; height: 18px;
+    border-right: 2.5px solid var(--gold);
+    border-bottom: 2.5px solid var(--gold);
+    transform: rotate(45deg);
+    animation: arrowBounce 1.4s ease-in-out infinite;
+    opacity: 0;
+  }
+  .arrow-chevrons i:nth-child(1) { animation-delay: 0s;    opacity: .3; }
+  .arrow-chevrons i:nth-child(2) { animation-delay: .2s;   opacity: .6; }
+  .arrow-chevrons i:nth-child(3) { animation-delay: .4s;   opacity: 1;  }
+  @keyframes arrowBounce {
+    0%   { transform: rotate(45deg) translate(0,0);   opacity: 0; }
+    50%  { transform: rotate(45deg) translate(5px,5px); opacity: 1; }
+    100% { transform: rotate(45deg) translate(0,0);   opacity: 0; }
+  }
 
-  /* WhatsApp CTA Main Button - pulse glow */
+
+
+  /* ── TESTIMONIAL CAROUSEL ── */
+  .testi-carousel-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+  .testi-carousel {
+    display: flex;
+    transition: transform .45s cubic-bezier(.25,.46,.45,.94);
+    will-change: transform;
+    align-items: stretch;
+  }
+  .testi-carousel .testi-card {
+    min-width: 100%;
+    width: 100%;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    margin: 0 !important;
+    border-radius: 20px;
+  }
+  .testi-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .testi-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    border: none;
+    cursor: pointer;
+    transition: background .3s, transform .3s;
+    padding: 0;
+  }
+  .testi-dot.active {
+    background: var(--gold);
+    transform: scale(1.3);
+  }
+  .testi-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 14px;
+  }
+  .testi-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,180,0,.4);
+    background: rgba(255,107,0,.1);
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .testi-btn:hover {
+    background: rgba(255,107,0,.3);
+    transform: scale(1.1);
+  }
+
+  /* ── RESULT BAR & NICHE TAG ── */
+  .testi-niche-tag {
+    display: inline-block;
+    background: rgba(255,180,0,.12);
+    border: 1px solid rgba(255,180,0,.3);
+    color: var(--gold);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+  .testi-result-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    background: rgba(255,107,0,.08);
+    border-left: 3px solid var(--fire);
+    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+  .testi-result-bar span {
+    font-size: .7rem;
+    color: rgba(255,255,255,.45);
+    display: block;
+  }
+  .testi-result-bar strong {
+    font-size: .88rem;
+    color: var(--gold);
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .testi-card {
+    background: linear-gradient(135deg, rgba(255,107,0,.08), rgba(255,180,0,.04));
+    border: 1px solid rgba(255,180,0,.2);
+    border-radius: 20px;
+    padding: 18px 16px;
+    position: relative;
+    backdrop-filter: blur(8px);
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+  }
+  .testi-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(255,107,0,.18);
+  }
+  .testi-quote {
+    font-size: 3rem;
+    line-height: .8;
+    color: var(--fire);
+    font-family: Georgia, serif;
+    margin-bottom: 6px;
+    opacity: .6;
+  }
+  .testi-text {
+    font-size: .88rem;
+    color: rgba(255,255,255,.8);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testi-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testi-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fire), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1rem; color: #000;
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 700; font-size: .9rem; }
+  .testi-business { font-size: .75rem; color: rgba(255,255,255,.45); }
+  .testi-stars {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+  .testi-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: linear-gradient(90deg, var(--fire), var(--gold));
+    color: #000; font-size: .62rem; font-weight: 800;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 50px;
+  }
+
+
+  /* ══ BUTTON ANIMATIONS ══ */
+
+  /* WhatsApp main CTA — shimmer + pulse glow */
   .cta-main {
     position: relative;
     overflow: hidden;
-    animation: fadeDown .7s .35s ease both, pulsGlow 2.5s ease-in-out infinite !important;
+    animation: fadeDown .7s .35s ease both, waPulse 2.5s ease-in-out infinite !important;
   }
-  @keyframes pulsGlow {
-    0%, 100% { box-shadow: 0 0 20px rgba(37,211,102,.4), 0 0 0px rgba(37,211,102,0); }
-    50%       { box-shadow: 0 0 40px rgba(37,211,102,.8), 0 0 60px rgba(37,211,102,.3); }
+  @keyframes waPulse {
+    0%,100% { box-shadow: 0 0 20px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,.3); }
+    50%      { box-shadow: 0 0 40px rgba(37,211,102,.8), 0 0 20px 8px rgba(37,211,102,.1); }
   }
-  .cta-main::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,.25), transparent);
-    animation: shimmer 2.2s ease-in-out infinite;
+  .cta-main::after {
+    content:'';
+    position:absolute;
+    top:0; left:-120%;
+    width:60%; height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.3),transparent);
+    animation: shimmer 2.5s ease-in-out infinite;
   }
   @keyframes shimmer {
-    0%   { left: -100%; }
-    60%  { left: 130%; }
-    100% { left: 130%; }
+    0%   { left:-120%; }
+    55%  { left:140%; }
+    100% { left:140%; }
   }
 
-  /* Plan CTA buttons - bounce on hover + ripple */
+  /* Plan "Start Now" buttons — breathing + ripple */
   .plan-cta {
-    position: relative;
-    overflow: hidden;
-    transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s !important;
-    animation: btnBreath 3s ease-in-out infinite;
+    position:relative; overflow:hidden;
+    animation: btnBreathe 3s ease-in-out infinite !important;
   }
-  @keyframes btnBreath {
-    0%, 100% { transform: scale(1); }
-    50%       { transform: scale(1.03); }
-  }
-  .plan-cta:hover {
-    transform: scale(1.08) translateY(-3px) !important;
-    box-shadow: 0 0 35px rgba(255,140,0,.6) !important;
+  @keyframes btnBreathe {
+    0%,100% { transform:scale(1); box-shadow:0 0 10px rgba(255,140,0,.3); }
+    50%     { transform:scale(1.04); box-shadow:0 0 28px rgba(255,140,0,.6); }
   }
   .plan-cta::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 0; height: 0;
-    background: rgba(255,255,255,.25);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width .5s ease, height .5s ease, opacity .5s ease;
-    opacity: 0;
+    content:'';
+    position:absolute;
+    top:50%; left:50%;
+    width:0; height:0;
+    background:rgba(255,255,255,.25);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    transition:width .5s, height .5s, opacity .5s;
+    opacity:0;
   }
-  .plan-cta:active::after {
-    width: 300px; height: 300px; opacity: 0;
-  }
-
-  /* Scroll top button - bounce */
-  .scroll-top {
-    animation: bounceUp 2s ease-in-out infinite !important;
-  }
-  @keyframes bounceUp {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-6px); }
+  .plan-cta:active::after { width:300px; height:300px; opacity:0; }
+  .plan-cta:hover {
+    transform:scale(1.07) translateY(-3px) !important;
+    box-shadow:0 0 40px rgba(255,140,0,.7) !important;
   }
 
-  /* Niche cards hover - pop */
+  /* Niche cards — glow border on hover */
   .niche-card {
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1), border-color .3s, box-shadow .3s !important;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s !important;
   }
-  .niche-card:hover {
-    transform: translateY(-10px) scale(1.05) !important;
+  .niche-card:hover, .niche-card:active {
+    transform: translateY(-8px) scale(1.06) !important;
     border-color: var(--gold) !important;
-    box-shadow: 0 0 30px rgba(255,180,0,.3) !important;
+    box-shadow: 0 0 24px rgba(255,180,0,.4) !important;
   }
+
+  /* Scroll-top button — bounce */
+  .scroll-top {
+    animation: scrollBounce 2s ease-in-out infinite !important;
+  }
+  @keyframes scrollBounce {
+    0%,100% { transform:translateY(0); }
+    50%     { transform:translateY(-7px); }
+  }
+
+  /* Scroll-down arrow — already animated, boost it */
+  .arrow-chevrons i {
+    animation: arrowBounce 1.2s ease-in-out infinite !important;
+  }
+
+  /* Trust numbers glow */
+  .trust-num {
+    animation: numGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes numGlow {
+    0%,100% { filter:drop-shadow(0 0 4px rgba(255,180,0,.3)); }
+    50%     { filter:drop-shadow(0 0 16px rgba(255,180,0,.9)); }
+  }
+
+  /* Badge wiggle */
+  .badge {
+    animation: fadeDown .6s ease both, badgeWiggle 5s ease-in-out 2s infinite !important;
+  }
+  @keyframes badgeWiggle {
+    0%,88%,100% { transform:rotate(0deg); }
+    91%         { transform:rotate(-4deg); }
+    95%         { transform:rotate(4deg); }
+  }
+
+  /* Popular badge blink */
+  .popular-badge {
+    animation: popBlink 1.6s ease-in-out infinite;
+  }
+  @keyframes popBlink {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%     { opacity:.75; transform:scale(1.08); }
+  }
+  .popular-badge-x {
+    animation: popBlink 1.8s ease-in-out infinite;
+  }
+  @keyframes popBlink {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%     { opacity:.7; transform:scale(1.05); }
+  }
+
+  /* Testimonial arrow buttons pulse */
+  .testi-btn {
+    animation: testiPulse 2s ease-in-out infinite;
+  }
+  @keyframes testiPulse {
+    0%,100% { box-shadow:0 0 0 0 rgba(255,107,0,.4); }
+    50%     { box-shadow:0 0 0 8px rgba(255,107,0,.0); }
+  }
+  .testi-btn:hover { transform:scale(1.15) !important; background:rgba(255,107,0,.3) !important; }
 
   /* Service cards hover */
   .service-card {
     transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s !important;
   }
   .service-card:hover {
-    transform: translateY(-6px) scale(1.02) !important;
-    box-shadow: 0 10px 35px rgba(255,107,0,.2) !important;
+    transform:translateY(-6px) scale(1.02) !important;
+    box-shadow:0 12px 35px rgba(255,107,0,.2) !important;
   }
 
   /* Plan cards hover */
@@ -536,40 +873,22 @@
     transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s !important;
   }
   .plan-card:hover {
-    transform: translateY(-10px) !important;
-    box-shadow: 0 20px 60px rgba(255,107,0,.3) !important;
+    transform:translateY(-10px) !important;
+    box-shadow:0 20px 50px rgba(255,107,0,.25) !important;
   }
 
-  /* Trust numbers - count-up glow on load */
-  .trust-num {
-    animation: glowPulse 3s ease-in-out infinite;
+  /* Final CTA WhatsApp button extra ring animation */
+  .final-cta .cta-main {
+    animation: waPulse 2s ease-in-out infinite, ringOut 3s ease-in-out infinite !important;
   }
-  @keyframes glowPulse {
-    0%, 100% { filter: drop-shadow(0 0 4px rgba(255,180,0,.3)); }
-    50%       { filter: drop-shadow(0 0 14px rgba(255,180,0,.8)); }
-  }
-
-  /* Badge - wiggle */
-  .badge {
-    animation: fadeDown .6s ease both, wiggle 4s ease-in-out 2s infinite !important;
-  }
-  @keyframes wiggle {
-    0%, 90%, 100% { transform: rotate(0deg); }
-    93%           { transform: rotate(-3deg); }
-    96%           { transform: rotate(3deg); }
-  }
-
-  /* Popular badge - blink */
-  .popular-badge {
-    animation: blink 2s ease-in-out infinite;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: .6; }
+  @keyframes ringOut {
+    0%   { outline: 0px solid rgba(37,211,102,0); outline-offset:0px; }
+    50%  { outline: 3px solid rgba(37,211,102,.3); outline-offset:8px; }
+    100% { outline: 0px solid rgba(37,211,102,0); outline-offset:16px; }
   }
 
   @media (max-width: 500px) {
-    .trust { gap: 20px; }
+    .trust { gap: 12px; }
     .plan-card { padding: 28px 18px; }
   }
 </style>
@@ -591,6 +910,17 @@
     Free Consultation – WhatsApp Now
   </a>
 </section>
+
+
+<!-- SCROLL DOWN ARROW -->
+<div class="scroll-down-arrow" onclick="document.querySelector('.trust').scrollIntoView({behavior:'smooth'})">
+  <span>Scroll Down</span>
+  <div class="arrow-chevrons">
+    <i></i>
+    <i></i>
+    <i></i>
+  </div>
+</div>
 
 <!-- TRUST STRIP -->
 <div class="trust reveal">
@@ -630,15 +960,73 @@
   <div class="divider"></div>
   <h2 class="section-title reveal">Kaun Fayda Utha Sakta Hai?</h2>
   <p class="section-sub reveal">Har tarah ke business ke liye customised ad strategy</p>
+  <p style="text-align:center;font-size:.8rem;color:var(--gold);margin-bottom:14px;animation:fadeDown .5s ease both;">👇 Apna business select karo — seedha WhatsApp pe jaoge</p>
   <div class="grid-niches">
-    <div class="niche-card reveal"><div class="niche-icon">🏠</div><p>Real Estate</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">📈</div><p>Affiliate Marketing</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">🤝</div><p>Network Marketing</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">💰</div><p>Finance &amp; Investment</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">₿</div><p>Crypto &amp; Trading</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">🛍️</div><p>Online Business</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">🏪</div><p>Offline Business</p></div>
-    <div class="niche-card reveal"><div class="niche-icon">🎯</div><p>Any Niche</p></div>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20kaafi%20time%20se%20%2AAffiliate%20Marketing%2A%20kar%20raha%20hoon.%0AMeri%20income%20nahi%20ho%20rahi%20hai%20kyunki%20high%20quality%20leads%20nahi%20mil%20rahi.%0AMujhe%20genuinely%20interested%20leads%20chahiye%20jo%20convert%20ho%20sakein.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">📈</div>
+      <p>Affiliate Marketing</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2ANetwork%20Marketing%2A%20karta%20hoon.%0AMeri%20team%20build%20nahi%20ho%20rahi%20aur%20jo%20rank%20achieve%20karna%20chahta%20hoon%20wo%20nahi%20ho%20pa%20raha.%0AHigh%20quality%20leads%20chahiye%20taaki%20genuine%20log%20join%20karein.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🤝</div>
+      <p>Network Marketing</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2ACryptocurrency%20%26%20Trading%2A%20mein%20kaam%20karta%20hoon.%0AMujhe%20apni%20community%20ke%20liye%20genuinely%20interested%20high%20quality%20leads%20chahiye.%0AAbhi%20leads%20nahi%20aa%20rahi%20jisse%20growth%20ruk%20gayi%20hai.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">₿</div>
+      <p>Crypto & Trading</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2AReal%20Estate%2A%20mein%20hoon%20%E2%80%94%20properties%20buy/sell%20karta%20hoon.%0AMeri%20sales%20nahi%20ho%20rahi%20kyunki%20genuine%20buyers/clients%20nahi%20mil%20rahe.%0AMujhe%20high%20quality%20property%20leads%20chahiye.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🏠</div>
+      <p>Real Estate</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2AFinance%20%26%20Investment%2A%20field%20mein%20hoon.%0AMujhe%20investment%20mein%20interested%20high%20quality%20clients%20chahiye.%0AAbhi%20jo%20leads%20aa%20rahi%20hain%20wo%20quality%20ki%20nahi%20hain.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">💰</div>
+      <p>Finance & Investment</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2AStock%20Market%20%26%20Color%20Trading%2A%20mein%20hoon.%0AMujhe%20apni%20trading%20service%20ke%20liye%20interested%20high%20quality%20leads%20chahiye.%0AAbhi%20sahi%20clients%20nahi%20mil%20rahe.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">📊</div>
+      <p>Stock & Color Trading</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2AMLM%20/%20Direct%20Selling%2A%20business%20karta%20hoon.%0AMeri%20downline%20nahi%20ban%20rahi%20aur%20genuine%20distributors%20nahi%20mil%20rahe.%0AHigh%20quality%20leads%20chahiye%20jo%20seriously%20join%20karna%20chahein.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🌐</div>
+      <p>MLM / Direct Selling</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMera%20%2AOnline%20Business%2A%20hai.%0AMujhe%20social%20media%20se%20high%20quality%20customers%20chahiye.%0AAbhi%20enough%20customers%20nahi%20aa%20rahe%20jisse%20sales%20kam%20hai.%0A%0AKya%20aap%20mere%20liye%20Facebook%20%26%20Instagram%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🛍️</div>
+      <p>Online Business</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMera%20%2AOffline%20/%20Local%20Business%2A%20hai.%0AMujhe%20apne%20area%20mein%20zyada%20local%20customers%20chahiye.%0AAbhi%20footfall%20aur%20enquiries%20bahut%20kam%20hain.%0A%0AKya%20aap%20mere%20liye%20local%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🏪</div>
+      <p>Offline Business</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2AHealth%20%26%20Insurance%2A%20field%20mein%20hoon.%0AMujhe%20genuinely%20interested%20clients%20chahiye%20jo%20policy%20ya%20service%20lena%20chahein.%0AAbhi%20quality%20leads%20nahi%20aa%20rahi%20aur%20conversion%20bahut%20kam%20hai.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🏥</div>
+      <p>Health & Insurance</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMain%20%2AFLP%20%28Forever%20Living%20Products%29%2A%20ka%20distributor%20hoon.%0AMeri%20income%20nahi%20ho%20rahi%20hai%20aur%20level%20nahi%20nikal%20rahi.%0A2CC%20ya%204CC%20achieve%20karna%20chahta%20hoon%20lekin%20high%20quality%20leads%20nahi%20mil%20rahi.%0AGenuinely%20interested%20log%20chahiye%20jo%20product%20use%20karein%20aur%20business%20join%20karein.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">🌿</div>
+      <p>FLP<br><small style="font-size:.7rem;opacity:.7">(Forever Living Product)</small></p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMeri%20%2ACoaching%20/%20Consulting%2A%20service%20hai.%0AMujhe%20apni%20services%20ke%20liye%20serious%20clients%20nahi%20mil%20rahe.%0AHigh%20quality%20leads%20chahiye%20jo%20genuinely%20interested%20hon.%0A%0AKya%20aap%20mere%20liye%20ad%20setup%20kar%20sakte%20hain%3F" target="_blank">
+      <div class="niche-icon">💼</div>
+      <p>Coaching & Consulting</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
+    <a class="niche-card reveal" href="https://wa.me/919334367675?text=Hello%20Rupesh%20bhai%20%F0%9F%99%8F%0A%0AMera%20ek%20business%20hai%20aur%20mujhe%20uske%20liye%20high%20quality%20leads%20chahiye.%0AMujhe%20guidance%20chahiye%20ki%20mere%20business%20ke%20liye%20kaunsa%20plan%20best%20rahega.%0A%0APlease%20mujhe%20suggest%20karein%21" target="_blank" style="grid-column:span 2">
+      <div class="niche-icon">🎯</div>
+      <p>Koi Bhi Business</p>
+      <div class="niche-tap">Tap to Connect →</div>
+    </a>
   </div>
 </section>
 
@@ -739,6 +1127,243 @@
   </div>
 </section>
 
+
+
+<!-- CLIENT RESULTS SECTION -->
+<section class="results-section">
+  <div class="divider"></div>
+  <h2 class="section-title reveal">Client Results & Feedback</h2>
+  <p class="section-sub reveal">Real clients — Real results — Real proof</p>
+
+  <div class="results-upload-note reveal">
+    🎬 <strong>Video & Screenshot results</strong> jald yahan add honge!<br>
+    Clients ke real income proof, team screenshots & feedback dekh sakte honge.
+  </div>
+
+  <div class="results-grid">
+
+    <!-- Card 1 — Network Marketing -->
+    <div class="result-card reveal">
+      <div class="result-media">
+        <div class="result-media-placeholder">
+          <div class="icon">🎬</div>
+          <p>Client Video<br>Coming Soon</p>
+        </div>
+        <div class="result-play-btn">▶</div>
+      </div>
+      <div class="result-info">
+        <div class="result-niche-tag">🤝 Network Marketing</div>
+        <div class="result-stars">★★★★★</div>
+        <div class="result-name">Rajesh Kumar</div>
+        <div class="result-desc">30 din mein 4th Ring achieve ki, 300+ team bani</div>
+        <div class="result-stats">
+          <div class="result-stat"><span>Income</span><strong>₹2L+/mo</strong></div>
+          <div class="result-stat"><span>Team</span><strong>300+</strong></div>
+          <div class="result-stat"><span>Plan</span><strong>30 Days</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Affiliate Marketing -->
+    <div class="result-card reveal">
+      <div class="result-media">
+        <div class="result-media-placeholder">
+          <div class="icon">🎬</div>
+          <p>Client Video<br>Coming Soon</p>
+        </div>
+        <div class="result-play-btn">▶</div>
+      </div>
+      <div class="result-info">
+        <div class="result-niche-tag">📈 Affiliate Marketing</div>
+        <div class="result-stars">★★★★★</div>
+        <div class="result-name">Priya Sharma</div>
+        <div class="result-desc">Pehle mahine mein ₹1 lakh+ income, 8X ROI</div>
+        <div class="result-stats">
+          <div class="result-stat"><span>Income</span><strong>₹1L+</strong></div>
+          <div class="result-stat"><span>ROI</span><strong>8X</strong></div>
+          <div class="result-stat"><span>Plan</span><strong>30 Days</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Real Estate -->
+    <div class="result-card reveal">
+      <div class="result-media">
+        <div class="result-media-placeholder">
+          <div class="icon">🎬</div>
+          <p>Client Video<br>Coming Soon</p>
+        </div>
+        <div class="result-play-btn">▶</div>
+      </div>
+      <div class="result-info">
+        <div class="result-niche-tag">🏠 Real Estate</div>
+        <div class="result-stars">★★★★★</div>
+        <div class="result-name">Suresh Patel</div>
+        <div class="result-desc">3 property deals close, ₹5 lakh+ income ek mahine mein</div>
+        <div class="result-stats">
+          <div class="result-stat"><span>Income</span><strong>₹5L+</strong></div>
+          <div class="result-stat"><span>Deals</span><strong>3 Closed</strong></div>
+          <div class="result-stat"><span>Plan</span><strong>30 Days</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Crypto Trading -->
+    <div class="result-card reveal">
+      <div class="result-media">
+        <div class="result-media-placeholder">
+          <div class="icon">🎬</div>
+          <p>Client Video<br>Coming Soon</p>
+        </div>
+        <div class="result-play-btn">▶</div>
+      </div>
+      <div class="result-info">
+        <div class="result-niche-tag">₿ Crypto & Trading</div>
+        <div class="result-stars">★★★★★</div>
+        <div class="result-name">Amit Tiwari</div>
+        <div class="result-desc">200+ quality leads, 7 din se seedha 30 din plan upgrade</div>
+        <div class="result-stats">
+          <div class="result-stat"><span>Leads</span><strong>200+</strong></div>
+          <div class="result-stat"><span>Plan</span><strong>30 Days</strong></div>
+          <div class="result-stat"><span>Rating</span><strong>10/10</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 — Finance -->
+    <div class="result-card reveal">
+      <div class="result-media">
+        <div class="result-media-placeholder">
+          <div class="icon">🎬</div>
+          <p>Client Video<br>Coming Soon</p>
+        </div>
+        <div class="result-play-btn">▶</div>
+      </div>
+      <div class="result-info">
+        <div class="result-niche-tag">💰 Finance & Investment</div>
+        <div class="result-stars">★★★★★</div>
+        <div class="result-name">Neha Gupta</div>
+        <div class="result-desc">60+ leads, 15 clients converted, 20X return on service charge</div>
+        <div class="result-stats">
+          <div class="result-stat"><span>Leads</span><strong>60+</strong></div>
+          <div class="result-stat"><span>Converted</span><strong>15</strong></div>
+          <div class="result-stat"><span>Return</span><strong>20X</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 — Online Business -->
+    <div class="result-card reveal">
+      <div class="result-media">
+        <div class="result-media-placeholder">
+          <div class="icon">🎬</div>
+          <p>Client Video<br>Coming Soon</p>
+        </div>
+        <div class="result-play-btn">▶</div>
+      </div>
+      <div class="result-info">
+        <div class="result-niche-tag">🛍️ Online Business</div>
+        <div class="result-stars">★★★★★</div>
+        <div class="result-name">Mohit Agarwal</div>
+        <div class="result-desc">14 din mein 80+ orders, WhatsApp pe seedha customers</div>
+        <div class="result-stats">
+          <div class="result-stat"><span>Orders</span><strong>80+</strong></div>
+          <div class="result-stat"><span>Plan</span><strong>14 Days</strong></div>
+          <div class="result-stat"><span>Channel</span><strong>WhatsApp</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section style="position:relative;z-index:1;padding:40px 20px;">
+  <div class="divider"></div>
+  <h2 class="section-title reveal">Client Kya Kehte Hain?</h2>
+  <p class="section-sub reveal">Real results — Real log</p>
+
+  <div class="testi-carousel-wrap">
+    <div class="testi-carousel" id="testiCarousel">
+
+      <div class="testi-card">
+        <div class="testi-badge">🏆 Top Result</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Maine <strong>30 din ka plan</strong> liya — sirf ek mahine mein meri <strong>300 logon ki team</strong> ban gayi! <strong>4th Ring achieve</strong> kiya aur monthly income <strong>₹2,00,000+</strong> ho gayi!</p>
+        <div class="testi-footer">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#FF6B00,#FFB400)">R</div>
+          <div><div class="testi-name">Rajesh Kumar</div><div class="testi-business">Network Marketing • 30 Days Plan</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-badge">🏆 Top Result</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Pehle mahine mein hi <strong>₹1,00,000+ income</strong> aayi! Unhone bilkul sahi audience target ki. <strong>14 din ka plan</strong> liya tha, results dekh ke <strong>30 din ka le liya!</strong></p>
+        <div class="testi-footer">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#7B2FFF,#FF6B00)">P</div>
+          <div><div class="testi-name">Priya Sharma</div><div class="testi-business">Affiliate Marketing • 30 Days Plan</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-badge">🏆 Top Result</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Ek hi month mein <strong>₹5,00,000+ ki income!</strong> 3 property deals close hue — buyers bilkul ready-to-buy the. Yeh normal leads nahi thi, <strong>high quality buyers</strong> the!</p>
+        <div class="testi-footer">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#00B09B,#FFB400)">S</div>
+          <div><div class="testi-name">Suresh Patel</div><div class="testi-business">Real Estate • 30 Days Plan</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-badge">✅ Verified</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text"><strong>7 din ka plan</strong> liya try karne ke liye — results itne achhe the ki seedha <strong>30 din upgrade!</strong> <strong>200+ interested leads</strong> aayi. Rupesh bhai ka targeting ekdum top level!</p>
+        <div class="testi-footer">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#F7931A,#FFB400)">A</div>
+          <div><div class="testi-name">Amit Tiwari</div><div class="testi-business">Crypto & Trading • 30 Days Plan</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-badge">✅ Verified</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text"><strong>14 din mein 60+ investment leads</strong> — jisme se <strong>15 ne actual investment kiya.</strong> Service charge se <strong>20x return!</strong> Rupesh bhai ko ek baar try karo fir kahi nahi jaoge!</p>
+        <div class="testi-footer">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#11998E,#38EF7D)">N</div>
+          <div><div class="testi-name">Neha Gupta</div><div class="testi-business">Finance & Investment • 14 Days Plan</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-badge">✅ Verified</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">WhatsApp messaging ads lagwaaye — seedha customers aane lage! <strong>14 din mein 80+ orders.</strong> Isse pehle itna result kisi ne nahi diya. <strong>Bahut hi professional kaam!</strong></p>
+        <div class="testi-footer">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#FF6B6B,#FF8E53)">M</div>
+          <div><div class="testi-name">Mohit Agarwal</div><div class="testi-business">Online Business • 14 Days Plan</div></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="testi-dots" id="testiDots"></div>
+    <div class="testi-nav">
+      <button class="testi-btn" id="testiPrev">&#8592;</button>
+      <button class="testi-btn" id="testiNext">&#8594;</button>
+    </div>
+  </div>
+
+</section>
+
+
 <!-- FINAL CTA -->
 <div class="final-cta">
   <h2 class="reveal">Ready to Grow?<br>Let's Talk.</h2>
@@ -795,6 +1420,127 @@ reveals.forEach(el => io.observe(el));
 // Scroll top btn
 const btn = document.getElementById('scrollTop');
 window.addEventListener('scroll', () => { btn.classList.toggle('show', scrollY > 400); });
+</script>
+
+<script>
+// Testimonial Carousel
+const carousel = document.getElementById('testiCarousel');
+const dotsWrap = document.getElementById('testiDots');
+const cards = carousel ? carousel.querySelectorAll('.testi-card') : [];
+let current = 0;
+let startX = 0;
+let isDragging = false;
+
+function goTo(idx) {
+  if (!carousel) return;
+  current = (idx + cards.length) % cards.length;
+  carousel.style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.testi-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+}
+
+// Build dots
+if (dotsWrap && cards.length) {
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+}
+
+document.getElementById('testiPrev')?.addEventListener('click', () => goTo(current - 1));
+document.getElementById('testiNext')?.addEventListener('click', () => goTo(current + 1));
+
+// Touch swipe
+if (carousel) {
+  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, {passive:true});
+  carousel.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    isDragging = false;
+  });
+}
+
+// Auto play
+setInterval(() => goTo(current + 1), 4000);
+</script>
+
+<script>
+// Video/Screenshot Carousel
+(function() {
+  const carousel = document.getElementById('vidCarousel');
+  const dotsWrap = document.getElementById('vidDots');
+  const counter  = document.getElementById('vidCounter');
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll('.vid-slide');
+  let current = 0;
+  let startX = 0;
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    carousel.style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.vid-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    if (counter) counter.textContent = (current + 1) + ' / ' + slides.length;
+    // Pause all videos when sliding
+    carousel.querySelectorAll('video').forEach(v => v.pause());
+  }
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'vid-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    if (dotsWrap) dotsWrap.appendChild(dot);
+  });
+
+  document.getElementById('vidPrev')?.addEventListener('click', () => goTo(current - 1));
+  document.getElementById('vidNext')?.addEventListener('click', () => goTo(current + 1));
+
+  // Touch swipe
+  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  carousel.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const c = document.getElementById('testiCarousel');
+  const d = document.getElementById('testiDots');
+  if(!c) return;
+  const cards = c.querySelectorAll('.testi-card');
+  let cur = 0, sx = 0;
+
+  function goTo(i){
+    cur = (i + cards.length) % cards.length;
+    c.style.transform = 'translateX(-' + (cur*100) + '%)';
+    document.querySelectorAll('.testi-dot').forEach((dot,j) => dot.classList.toggle('active', j===cur));
+  }
+
+  cards.forEach((_,i) => {
+    const dot = document.createElement('button');
+    dot.className = 'testi-dot' + (i===0?' active':'');
+    dot.onclick = () => goTo(i);
+    if(d) d.appendChild(dot);
+  });
+
+  document.getElementById('testiPrev')?.addEventListener('click', () => goTo(cur-1));
+  document.getElementById('testiNext')?.addEventListener('click', () => goTo(cur+1));
+
+  c.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  c.addEventListener('touchend', e => {
+    const diff = sx - e.changedTouches[0].clientX;
+    if(Math.abs(diff) > 40) goTo(diff > 0 ? cur+1 : cur-1);
+  });
+
+  setInterval(() => goTo(cur+1), 4000);
+})();
 </script>
 </body>
 </html>
